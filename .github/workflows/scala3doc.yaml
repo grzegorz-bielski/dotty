@@ -53,6 +53,17 @@ jobs:
 
       - name: Generate testcases documentation
         run: ./project/scripts/sbt scala3doc/generateTestcasesDocumentation
+        
+      - name: Install node
+        uses: actions/setup-node@v2-beta
+        with:
+          node-version: 12
+          check-latest: true
+
+      - name: Run e2e tests
+        run: |
+          npm --prefix ./scala3doc/e2e ci
+          npm --prefix ./scala3doc/e2e run ci
 
       - name: Generate Scala 3 documentation
         run: ./project/scripts/sbt scala3doc/generateScala3Documentation
